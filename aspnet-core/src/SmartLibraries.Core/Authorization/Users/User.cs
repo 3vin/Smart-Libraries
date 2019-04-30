@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Abp.Authorization.Users;
+﻿using Abp.Authorization.Users;
 using Abp.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace SmartLibraries.Authorization.Users
 {
     public class User : AbpUser<User>
     {
-        public const string DefaultPassword = "123qwe";
+        public string Address { get; set; }
+        public DateTime? MemberExpiryDate { get; set; }
 
         public static string CreateRandomPassword()
         {
