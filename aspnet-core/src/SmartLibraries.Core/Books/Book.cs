@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SmartLibraries.Books
 {
     [Table("Books")]
-    public class Book : Entity
+    public class Book : Entity<long>, IMustHaveTenant
     {
         public string Author { get; set; }
         public long Barcode { get; set; }
@@ -12,5 +12,6 @@ namespace SmartLibraries.Books
         public string Description { get; set; }
         public long ISBN { get; set; }
         public BookStatus Status { get; set; }
+        public int TenantId { get; set; }
     }
 }
