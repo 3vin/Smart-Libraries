@@ -16,6 +16,7 @@ using SmartLibraries.Configuration;
 using SmartLibraries.Identity;
 
 using Abp.AspNetCore.SignalR.Hubs;
+using Abp.AppFactory.Sync;
 
 namespace SmartLibraries.Web.Host.Startup
 {
@@ -100,7 +101,7 @@ namespace SmartLibraries.Web.Host.Startup
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<AbpCommonHub>("/signalr");
+                routes.MapHub<SyncHub>("/signalr");
             });
 
             app.UseMvc(routes =>

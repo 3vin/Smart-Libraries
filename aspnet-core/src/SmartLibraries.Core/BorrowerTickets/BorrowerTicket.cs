@@ -7,15 +7,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartLibraries.BorrowerTickets
 {
-  
     [Table("BorrowerTickets")]
-    public class BorrowerTicket : FullAuditedEntity, IMustHaveTenant
+    public class BorrowerTicket : FullAuditedEntity<long>, IMustHaveTenant
     {
         public DateTime BorrowDate { get; set; }
+        public DateTime DueDate { get; set; }
         public DateTime? ReturnDate { get; set; }
 
         //Foreign Keys
         public int BookId { get; set; }
+
         public Book Book { get; set; }
 
         public long UserId { get; set; }

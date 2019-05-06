@@ -1,25 +1,27 @@
-﻿using System;
-using System.Text;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+﻿using Abp.AppFactory.Sync;
 using Abp.AspNetCore;
 using Abp.AspNetCore.Configuration;
 using Abp.AspNetCore.SignalR;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using Abp.Zero.Configuration;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using SmartLibraries.Authentication.JwtBearer;
 using SmartLibraries.Configuration;
 using SmartLibraries.EntityFrameworkCore;
+using System;
+using System.Text;
 
 namespace SmartLibraries
 {
     [DependsOn(
          typeof(SmartLibrariesApplicationModule),
          typeof(SmartLibrariesEntityFrameworkModule),
-         typeof(AbpAspNetCoreModule)
-        ,typeof(AbpAspNetCoreSignalRModule)
+         typeof(AbpAspNetCoreModule),
+         typeof(AbpAspNetCoreSignalRModule),
+         typeof(SyncModule)
      )]
     public class SmartLibrariesWebCoreModule : AbpModule
     {
