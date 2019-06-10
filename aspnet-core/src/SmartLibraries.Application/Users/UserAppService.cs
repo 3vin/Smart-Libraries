@@ -21,11 +21,12 @@ using SmartLibraries.Roles.Dto;
 using SmartLibraries.Users.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Abp.AppFactory.Interfaces;
 
 namespace SmartLibraries.Users
 {
     [AbpAuthorize(PermissionNames.Pages_Users)]
-    public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
+    public class UserAppService : SmartLibrariesAsyncCrudAppServiceBase<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
@@ -41,8 +42,9 @@ namespace SmartLibraries.Users
             IRepository<Role> roleRepository,
             IPasswordHasher<User> passwordHasher,
             IAbpSession abpSession,
-            LogInManager logInManager)
-            : base(repository)
+            LogInManager logInManager,
+            ISyncHub syncHub)
+            : base(repository, syncHub)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -50,6 +52,7 @@ namespace SmartLibraries.Users
             _passwordHasher = passwordHasher;
             _abpSession = abpSession;
             _logInManager = logInManager;
+
         }
 
         public override async Task<UserDto> Create(CreateUserDto input)
@@ -159,7 +162,7 @@ namespace SmartLibraries.Users
             return query.OrderBy(r => r.UserName);
         }
 
-        protected virtual void CheckErrors(IdentityResult identityResult)
+        protected override void CheckErrors(IdentityResult identityResult)
         {
             identityResult.CheckErrors(LocalizationManager);
         }
