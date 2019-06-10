@@ -13,7 +13,6 @@ namespace SmartLibraries.EntityFrameworkCore
         /* Define a DbSet for each entity of the application */
         public DbSet<Book> Books { get; set; }
         public DbSet<BorrowerTicket> BorrowerTickets { get; set; }
-        public DbSet<Author> Authors { get; set; }
 
         public SmartLibrariesDbContext(DbContextOptions<SmartLibrariesDbContext> options)
             : base(options)
