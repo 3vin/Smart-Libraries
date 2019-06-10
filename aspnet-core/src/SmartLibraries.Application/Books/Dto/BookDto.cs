@@ -1,7 +1,9 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 
 namespace SmartLibraries.Books.Dto
 {
+    [AutoMap(typeof(Book))]
     public class BookDto : EntityDto<long>
     {
         public string Author { get; set; }
